@@ -19,4 +19,5 @@ public class BaseCharacter implements Character {
     public void setName(String name) {
         this.name = name;
     }
+
 }

@@ -10,4 +10,8 @@ package characters;
  * associated with that character.
  */
 public interface Character {
+
+    public String getName();
+
+    public void setName(String name);
 }

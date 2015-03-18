@@ -1,20 +1,38 @@
 package characters;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+@Component
 @Path("characters")
 public class CharacterResource {
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String characters() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CharacterResource");
-        return "TODO: some JSON serialization of a character";
+    private CharacterService characterService;
+
+    public CharacterResource() {
+        AnnotationConfigApplicationContext ctx =
+                new AnnotationConfigApplicationContext();
+        ctx.register(CharacterAppConfig.class);
+        ctx.refresh();
+        this.characterService = ctx.getBean(CharacterService.class);
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getCharacter(@PathParam("name") String name) {
+        Character character = characterService.getCharacter(name);
+        // TODO: How do we serialize our model objects?
+        return String.format("{name: \"%s\"}", character.getName());
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String createCharacter(@FormParam("name") String name) {
+        Character character = characterService.createCharacter(name);
+        return String.format("{name: \"%s\"}", character.getName());
+    }
 }
