@@ -26,7 +26,11 @@ public class CharacterResource {
     public String getCharacter(@PathParam("name") String name) {
         Character character = characterService.getCharacter(name);
         // TODO: How do we serialize our model objects?
-        return String.format("{name: \"%s\"}", character.getName());
+        if (character != null) {
+            return String.format("{name: \"%s\"}", character.getName());
+        } else {
+            return "";
+        }
     }
 
     @POST
