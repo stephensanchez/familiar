@@ -1,6 +1,14 @@
 familiar
 ========
 
+Warning: This repository is still under rapid development. Sweeping changes will be made frequently.
+
+To Run:
+gradle jettyRun
+
+To access the beginnings of a RESTful interface:
+http://localhost:8080/familiar/api/v0/characters
+
 What do I want to do with this repo?
 * allow character sheets to be created
 * allow character sheets to be shared to DM
@@ -9,8 +17,4 @@ What do I want to do with this repo?
 * Configure macro actions to look up relative sheets and die rolls, modifiers, etc
 * Tracking and logs to help review a session history
 
-TODO:
-* Hibernate, ORM solution and schema design.
-* Documentation
-* Project Layout
 
